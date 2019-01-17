@@ -8,7 +8,7 @@ racquets_parameters = {
   hsMin: 95,
   hsMax: 100,
   wMin: 10.5,
-  wMax: 11.5,
+  wMax: 11.9,
   lMin: '',
   lMax: '',
   swMin: '',
@@ -35,7 +35,7 @@ racquets_parameters[:manufacturers].each do |manufacturer|
   html_doc.search('.rac_info').each do |element|
     info[:name] = element.search('.rac_name').text.strip
     element.search('.rac_specs tr').each do |sub_element|
-      info[sub_element.search('th').text.strip] = sub_element.search('td').text.strip
+      info[sub_element.search('th').text.strip.chomp(':').sub(' ', '_').downcase] = sub_element.search('td').text.strip
     end
     racquets[:racquets] << info
     count_by_brand += 1
